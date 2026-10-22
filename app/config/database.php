@@ -1,17 +1,14 @@
 <?php
+$host = 'localhost';
+$dbname = 'gesgov_atas';
+$username = 'root';
+$password = '';
 
-$host = "localhost";
-$user = "root";
-$password = "";
-$database = "gesgov_atas";
-
-$conn = new mysqli(
-    $host,
-    $user,
-    $password,
-    $database
-);
-
-if ($conn->connect_error) {
-    die("Erro na ligação: " . $conn->connect_error);
+try {
+    $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8", $username, $password);
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+} catch (PDOException $e) {
+    echo "Erro na ligação à base de dados: " . $e->getMessage();
+    exit();
 }
+?>

@@ -1,14 +1,11 @@
 <?php
+// index.php (Ponto de entrada do projeto)
+require_once __DIR__ . '/app/config/database.php';
 
-$conn = new mysqli(
-    "localhost",
-    "root",
-    "",
-    "gesgov_atas"
-);
+// Busca a ata na base de dados
+$stmt = $pdo->query("SELECT * FROM atas WHERE numero_ata LIKE '%DEZANOVE%' LIMIT 1");
+$ata = $stmt->fetch(PDO::FETCH_ASSOC);
 
-if ($conn->connect_error) {
-    die("Erro: " . $conn->connect_error);
-}
-
-echo "✅ Ligação à base de dados efetuada com sucesso!";
+// Carrega a view passando os dados
+require_once __DIR__ . '/app/views/ata_view.php';
+?>
